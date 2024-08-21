@@ -1,7 +1,12 @@
+import Categories from "../../Categories/Category/Categories"
+import Rooms from "../Rooms/Rooms"
+
 const Home = () => {
+ 
   return (
     <div>
-      <h1>Welcome to StayVista booking website</h1>
+      <Categories></Categories>
+      <Rooms></Rooms>
     </div>
   )
 }
