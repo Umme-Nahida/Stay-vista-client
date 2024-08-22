@@ -3,7 +3,7 @@
 import queryString from "query-string";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const CategoriCart = ({title,icon:Icon}) => {
+const CategoriCart = ({title,icon:Icon,selectedCategory}) => {
     const [params,setParams]=useSearchParams()
     const navigate=useNavigate()
     console.log(params.toString())
@@ -25,7 +25,7 @@ const CategoriCart = ({title,icon:Icon}) => {
     }
 
     return (
-        <div onClick={handleCategory} className="flex flex-col items-center justify-center gap-1 border-b-2 text-slate-500 hover:text-neutral-800 transition cursor-pointer">
+        <div onClick={handleCategory} className={`flex flex-col items-center justify-center gap-1 border-b-2 text-slate-500 hover:text-neutral-800 transition cursor-pointer ${selectedCategory ? 'border-neutral-800 text-neutral-800' : 'border-slate-500'}`}>
             <Icon className='text-xl'></Icon>
             <div className="text-lg">
                 {title}
