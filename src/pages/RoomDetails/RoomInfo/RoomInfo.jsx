@@ -27,6 +27,7 @@ const RoomInfo = ({ room }) => {
         </div>
         {/* description */}
         <div className="mt-3">
+            <hr />
           <p>{room?.description} </p>
         </div>
       </Container>
