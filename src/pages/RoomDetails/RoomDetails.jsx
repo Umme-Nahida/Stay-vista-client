@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
+import Header from "./Header/Header";
 
 const RoomDetails = () => {
     const {id}= useParams()
     
-    const [rooms,setRooms]=useState()
+    const [room,setRoom]=useState()
     const [loader,setLoader]=useState(true)
 
     useEffect(()=>{
@@ -13,20 +14,17 @@ const RoomDetails = () => {
        .then(res=>res.json())
        .then(data=>{
          const singleRoom = data.find(item=> item._id === id)
-         setRooms(singleRoom)
+         setRoom(singleRoom)
        })
     },[id])
 
     return (
         <div>
             {/* title */}
-            <div>
-                {/* imgae */}
-            </div>
+            <Header room={room}></Header>
             <div>
                 {/* text */}
-                <div></div>
-                {/* calender */}
+                
             </div>
         </div>
     );
