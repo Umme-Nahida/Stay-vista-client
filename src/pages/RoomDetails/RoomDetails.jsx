@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom";
 import Header from "./Header/Header";
 import RoomInfo from "./RoomInfo/RoomInfo";
+import RoomReservation from "./RoomReservation/RoomReservation";
 
 const RoomDetails = () => {
     const {id}= useParams()
@@ -26,8 +27,8 @@ const RoomDetails = () => {
             <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 gap-5 my-5 md:my-10">
                 {/* text */}
                 <RoomInfo room={room}></RoomInfo>
-                <div className="md:col-span-3">
-                    category
+                <div className="md:col-span-3 order-first md:order-2">
+                   <RoomReservation></RoomReservation>
                 </div>
             </div>
         </div>
