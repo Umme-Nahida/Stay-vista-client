@@ -11,7 +11,7 @@ const Header = ({ room }) => {
         <>
         
           <Heading title={room?.title} subtitle={room?.location} />
-          <div className="w-full md:h-[60vh] rounded-xl">
+          <div className="w-full md:h-[60vh] overflow-hidden mt-2 rounded-xl">
             <img
               className="object-cover h-full w-full"
               src={room?.image}
