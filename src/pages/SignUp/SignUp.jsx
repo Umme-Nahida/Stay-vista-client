@@ -1,7 +1,29 @@
 import { Link } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
+import axios from 'axios'
+import { imageUpload } from '../../Utilities/Utils'
+import { useContext } from 'react'
+import { AuthContext } from '../../providers/AuthProvider'
 
 const SignUp = () => {
+  const {createUser,updateUserProfile}=useContext(AuthContext)
+
+  const handleForm=async(e)=>{
+    e.preventDefault()
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // get selected image
+    const image = form.image.files[0];
+    // upload image in hosting
+    const imageUrl= await imageUpload(image);
+    const resutl = await createUser(email,password)
+    await updateUserProfile(name,imageUrl?.data?.display_url)
+    console.log(resutl)
+
+  }
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -10,13 +32,14 @@ const SignUp = () => {
           <p className='text-sm text-gray-400'>Welcome to StayVista</p>
         </div>
         <form
+          onSubmit={handleForm}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
         >
           <div className='space-y-4'>
             <div>
-              <label htmlFor='email' className='block mb-2 text-sm'>
+              <label htmlFor='name' className='block mb-2 text-sm'>
                 Name
               </label>
               <input
