@@ -6,10 +6,10 @@ import Heading from "./Heading";
 import { ScaleLoader } from "react-spinners";
 
 const Rooms = () => {
-    const [rooms,setRooms]=useState()
-    const [params,setParams]=useSearchParams()
-    const category = params.get('category')
-    const [loader,setLoader]=useState(true)
+    const [rooms,setRooms]=useState();
+    const [params,setParams]=useSearchParams();
+    const category = params.get('category');
+    const [loader,setLoader]=useState(true);
     useEffect(()=>{
        setLoader(true)
        fetch('rooms.json')
