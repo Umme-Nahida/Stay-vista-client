@@ -12,6 +12,7 @@ const CategoriCart = ({title,icon:Icon,selectedCategory}) => {
         console.log('clicked',title)
         let currentQuery = {};
         if(params){
+            // replace a string to a object 
             currentQuery=queryString.parse(params.toString())
         }
         const updateQuery = {...currentQuery, category:title}
