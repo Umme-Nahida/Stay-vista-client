@@ -69,12 +69,12 @@ const Sidebar = () => {
               <MenuItem
                 icon={TbHomePlus}
                 label='Add Room'
-                address='/addRoom'
+                address='add-room'
               />
               <MenuItem
                 icon={MdHomeWork}
                 label='My Listings'
-                address='/my-listings'
+                address='my-listings'
               />
 
               {/* Menu Items */}
