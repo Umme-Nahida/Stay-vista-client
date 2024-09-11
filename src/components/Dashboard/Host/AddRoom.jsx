@@ -26,7 +26,7 @@ const AddRoom = () => {
 
     const handleSubmit=async(e)=>{
        setLoading(true)
-        e.PrevendDefault()
+       e.preventDefault()
         const form = e.target;
         const location = form.location.value;
         const category = form.category.value;
@@ -42,7 +42,7 @@ const AddRoom = () => {
         
         const host = {
           name: user?.displayName,
-          image: user?.displayUrl,
+          image: user?.photoURL,
           email: user?.email
         }
 
@@ -53,9 +53,11 @@ const AddRoom = () => {
           image: image_url?.data?.display_url,
           host
         }
-
+        
+        console.log(roomData)
         try{
           const data = await saveRooms(roomData)
+          console.log(data)
           if(data.insertedId){
             toast.success("rooms added successfully")
             navigate('/dashboard/my-listings')
