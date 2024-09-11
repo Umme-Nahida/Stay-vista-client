@@ -80,7 +80,8 @@ const AddRoomForm = ({
                 <div className='flex flex-col w-max mx-auto text-center'>
                   <label>
                     <input
-                      className='text-sm cursor-pointer w-36 hidden'
+                      onChange={(e)=>handleImageChange(e.target.files[0])}
+                      className='text-sm cursor-pointer w-36 hidden bg-blue-500'
                       type='file'
                       name='image'
                       id='image'
@@ -88,7 +89,7 @@ const AddRoomForm = ({
                       hidden
                     />
                     <div className='bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500'>
-                      Upload Image
+                      {uploadButtonText}
                     </div>
                   </label>
                 </div>

@@ -6,6 +6,13 @@ import useAuth from "../../../hooks/useAuth";
 
 const AddRoom = () => {
     const {user}=useAuth();
+    const [uploadButtonText,setUploadButtonText] = useState('Upload Image')
+
+    // upload button text handler
+    const handleImageChange=(image)=>{
+      console.log("handleImage",image)
+      setUploadButtonText(image.name)
+    }
 
     const [dates,setDates]=useState({
         startDate: new Date(),
@@ -59,6 +66,8 @@ const AddRoom = () => {
        handleSubmit={handleSubmit}
        handleDates={handleDate}
        dates={dates}
+       handleImageChange={handleImageChange}
+       uploadButtonText={uploadButtonText}
       ></AddRoomForm>
     </div>
   );
