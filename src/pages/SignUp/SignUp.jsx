@@ -4,6 +4,7 @@ import axios from 'axios'
 import { imageUpload } from '../../Utilities/Utils'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
+import toast from 'react-hot-toast'
 
 const SignUp = () => {
   const {createUser,updateUserProfile}=useContext(AuthContext)
@@ -22,6 +23,7 @@ const SignUp = () => {
     const resutl = await createUser(email,password)
     await updateUserProfile(name,imageUrl?.data?.display_url)
     console.log(resutl)
+    toast.success('user created successfully')
 
   }
   return (

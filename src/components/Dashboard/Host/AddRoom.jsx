@@ -3,14 +3,18 @@ import { Helmet } from "react-helmet-async";
 import AddRoomForm from "../../Form/AddRoomForm";
 import { imageUpload } from "../../../Utilities/Utils";
 import useAuth from "../../../hooks/useAuth";
+import { saveRooms } from "../../../api/Rooms";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddRoom = () => {
+    const [loading, setLoading]=useState(false)
     const {user}=useAuth();
     const [uploadButtonText,setUploadButtonText] = useState('Upload Image')
+    const navigate = useNavigate()
 
     // upload button text handler
     const handleImageChange=(image)=>{
-      console.log("handleImage",image)
       setUploadButtonText(image.name)
     }
 
@@ -21,6 +25,7 @@ const AddRoom = () => {
     })
 
     const handleSubmit=async(e)=>{
+       setLoading(true)
         e.PrevendDefault()
         const form = e.target;
         const location = form.location.value;
@@ -49,6 +54,17 @@ const AddRoom = () => {
           host
         }
 
+        try{
+          const data = await saveRooms(roomData)
+          if(data.insertedId){
+            toast.success("rooms added successfully")
+            navigate('/dashboard/my-listings')
+          }
+        }catch(err){
+          toast.error(err?.message)
+        }finally{
+          setLoading(false)
+        }
 
        console.log(roomData)
     }
