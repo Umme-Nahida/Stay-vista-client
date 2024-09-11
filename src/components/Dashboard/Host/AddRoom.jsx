@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AddRoomForm from "../../Form/AddRoomForm";
 import { imageUpload } from "../../../Utilities/Utils";
+import useAuth from "../../../hooks/useAuth";
 
 const AddRoom = () => {
+    const {user}=useAuth();
 
     const [dates,setDates]=useState({
         startDate: new Date(),
@@ -25,10 +27,23 @@ const AddRoom = () => {
         const bathrooms = form.bathrooms.value;
         const description = form.description.value;
         const image = form.image.files[0]
+        
+        const host = {
+          name: user?.displayName,
+          image: user?.displayUrl,
+          email: user?.email
+        }
 
         const image_url = await imageUpload(image)
+        const roomData = {
+          location,
+          category,title,to,from, price,guest,bedrooms,bathrooms,description,
+          image: image_url?.data?.display_url,
+          host
+        }
 
-       console.log(location,category,title,to,from, price,guest,bedrooms,bathrooms,description,image_url)
+
+       console.log(roomData)
     }
 
     const handleDate = (range)=>{
