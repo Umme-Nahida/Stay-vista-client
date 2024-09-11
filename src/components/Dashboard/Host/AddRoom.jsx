@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AddRoomForm from "../../Form/AddRoomForm";
+import { imageUpload } from "../../../Utilities/Utils";
 
 const AddRoom = () => {
 
@@ -10,7 +11,7 @@ const AddRoom = () => {
         key: "selection"
     })
 
-    const handleSubmit=e=>{
+    const handleSubmit=async(e)=>{
         e.PrevendDefault()
         const form = e.target;
         const location = form.location.value;
@@ -25,9 +26,9 @@ const AddRoom = () => {
         const description = form.description.value;
         const image = form.image.files[0]
 
-        const image_url = await 
+        const image_url = await imageUpload(image)
 
-       console.log(location,category,title,to,from, price,guest,bedrooms,bathrooms,description,image)
+       console.log(location,category,title,to,from, price,guest,bedrooms,bathrooms,description,image_url)
     }
 
     const handleDate = (range)=>{
