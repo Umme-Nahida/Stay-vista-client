@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import Header from "./Header/Header";
 import RoomInfo from "./RoomInfo";
 import Calender from "./Calender";
@@ -8,20 +8,9 @@ import Container from "../../components/Shared/Container";
 import { getAllRooms } from "../../api/Rooms";
 
 const RoomDetails = () => {
-    const {id}=useParams()
     const [loader,setLoader]=useState(true);
-    const [room,setRoom]=useState({})
-
-    useEffect(()=>{
-       setLoader(true)
-       getAllRooms()
-       .then(data=>{
-        const singleRoom = data.find(item=>item._id === id)
-        setRoom(singleRoom)
-        setLoader(false)
-        console.log(singleRoom)
-       })
-    },[id])
+    const room= useLoaderData()
+    console.log(room)
 
    
     return (

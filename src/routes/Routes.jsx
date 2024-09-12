@@ -8,6 +8,7 @@ import RoomDetails from '../pages/RoomDetails/RoomDetails'
 import DashboardLayout from '../components/Dashboard/DashboardLayout'
 import AddRoom from '../components/Dashboard/Host/AddRoom'
 import MyListings from '../components/Dashboard/Host/MyListings'
+import { getRoom } from '../api/Rooms'
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       {
         path: '/room/:id',
         element: <RoomDetails></RoomDetails>,
+        loader:({params})=> getRoom(params.id)
       },
     ],
   },
