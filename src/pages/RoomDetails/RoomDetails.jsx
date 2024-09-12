@@ -5,6 +5,7 @@ import RoomInfo from "./RoomInfo";
 import Calender from "./Calender";
 import RoomReservation from "./RoomReservation/RoomReservation";
 import Container from "../../components/Shared/Container";
+import { getAllRooms } from "../../api/Rooms";
 
 const RoomDetails = () => {
     const {id}=useParams()
@@ -13,16 +14,16 @@ const RoomDetails = () => {
 
     useEffect(()=>{
        setLoader(true)
-       fetch('/rooms.json')
-       .then(res=>res.json())
+       getAllRooms()
        .then(data=>{
         const singleRoom = data.find(item=>item._id === id)
         setRoom(singleRoom)
         setLoader(false)
+        console.log(singleRoom)
        })
     },[id])
 
-
+   
     return (
         <Container>
             <div>
