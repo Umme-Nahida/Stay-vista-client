@@ -4,6 +4,7 @@ import Container from "../../components/Shared/Container";
 import { useSearchParams } from "react-router-dom";
 import Heading from "./Heading";
 import { ScaleLoader } from "react-spinners";
+import { getAllRooms } from "../../api/Rooms";
 
 const Rooms = () => {
     const [rooms,setRooms]=useState();
@@ -12,9 +13,9 @@ const Rooms = () => {
     const [loader,setLoader]=useState(true);
     useEffect(()=>{
        setLoader(true)
-       fetch('rooms.json')
-       .then(res=>res.json())
+       getAllRooms()
        .then(data=>{
+        console.log(data)
        if(category){
         const categoryData = data.filter(item=>item.category === category)
         setRooms(categoryData)

@@ -43,7 +43,7 @@ const RoomInfo = ({ roomData }) => {
           className='
           text-lg font-light text-neutral-500'
         >
-          {roomData.description}
+          {roomData?.description}
         </div>
         <hr />
       </div>
