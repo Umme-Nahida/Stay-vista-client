@@ -3,10 +3,17 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
+import toast from 'react-hot-toast'
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { user } = useAuth()
+  const { user,logOut } = useAuth()
+
+  const handleLogOut = ()=>{
+    logOut()
+    toast.success('user LogOut successfully')
+  }
+
 
   return (
     <div className='relative'>
@@ -63,6 +70,12 @@ const MenuDropdown = () => {
               className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
             >
               Sign Up
+            </Link>
+            <Link
+              onClick={handleLogOut}
+              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+            >
+              Log Out
             </Link>
           </div>
         </div>

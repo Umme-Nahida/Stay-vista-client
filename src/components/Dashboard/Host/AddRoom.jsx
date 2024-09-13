@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const AddRoom = () => {
     const [loading, setLoading]=useState(false)
     const {user}=useAuth();
+    console.log(user)
     const [uploadButtonText,setUploadButtonText] = useState('Upload Image')
     const navigate = useNavigate()
 
