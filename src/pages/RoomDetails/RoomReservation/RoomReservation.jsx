@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Calender from '../Calender'
 import Button from '../../../components/Button/Button'
+import { formatDistance } from 'date-fns'
 
 const RoomReservation = ({ roomData }) => {
  console.log(roomData)
@@ -14,6 +15,13 @@ const RoomReservation = ({ roomData }) => {
 //     setValue({ ...value })
 //   }
 
+// get total days
+const totalDays = parseFloat(
+  formatDistance(new Date(roomData?.to),new Date(roomData?.from)).split(' ')[0]
+)
+ 
+
+const totalPrice = totalDays * roomData?.price;
 
 
   return (
@@ -35,7 +43,7 @@ const RoomReservation = ({ roomData }) => {
       <hr />
       <div className='p-4 flex flex-row items-center justify-between font-semibold text-lg'>
         <div>Total</div>
-        <div>$ {roomData?.price}</div>
+        <div>$ {totalPrice}</div>
       </div>
     </div>
   )

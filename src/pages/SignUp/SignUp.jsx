@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import axios from 'axios'
 import { imageUpload } from '../../Utilities/Utils'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
+import { saveUser } from '../../api/Rooms'
 
 const SignUp = () => {
-  const {createUser,updateUserProfile}=useContext(AuthContext)
+  const {createUser,updateUserProfile,user}=useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleForm=async(e)=>{
     e.preventDefault()
@@ -21,9 +23,16 @@ const SignUp = () => {
     // upload image in hosting
     const imageUrl= await imageUpload(image);
     const resutl = await createUser(email,password)
+
+    // save user to the db 
+    const userSaveResponse = await saveUser(resutl?.user)
+    // console.log(userSaveResponse)
+
+    // update user profile
     await updateUserProfile(name,imageUrl?.data?.display_url)
     console.log(resutl)
     toast.success('user created successfully')
+    navigate('/')
 
   }
   return (
@@ -113,7 +122,7 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+        <div  className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
