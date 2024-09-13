@@ -1,11 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import Social from '../../components/Shared/Social/Social'
+import useAuth from '../../hooks/useAuth'
+import toast from 'react-hot-toast'
 
 const Login = () => {
+  const {signIn}= useAuth()
+   const navigate = useNavigate();
 
+  const handleSubmit = async(e)=>{
+    e.preventDefault()
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    await signIn(email,password)
+    toast.success('user login successfully')
+    navigate('/')
+  }
   
-
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -16,6 +28,7 @@ const Login = () => {
           </p>
         </div>
         <form
+          onSubmit={handleSubmit}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'

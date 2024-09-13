@@ -9,8 +9,8 @@ const Social = () => {
     const navigate = useNavigate()
 
     const handleGoogle= async()=>{
-       signInWithGoogle()
-       await saveUser(user)
+       const result = await signInWithGoogle()
+       await saveUser(result.user)
        navigate('/')
     }
   return (
