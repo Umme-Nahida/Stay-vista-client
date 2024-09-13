@@ -26,6 +26,9 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive)
   }
+
+  // get user role 
+
   return (
     <>
       {/* Small Screen Navbar */}

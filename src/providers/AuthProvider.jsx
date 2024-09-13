@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
+import { clearCookie, getJwt } from '../api/Rooms'
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -41,8 +42,9 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email)
   }
 
-  const logOut = () => {
+  const logOut = async() => {
     setLoading(true)
+    await clearCookie()
     return signOut(auth)
   }
 
@@ -58,6 +60,10 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       console.log('CurrentUser-->', currentUser)
+      const loggedUser = currentUser?.email || user.email
+      if(currentUser){
+        getJwt(loggedUser)
+      }
       setLoading(false)
     })
     return () => {

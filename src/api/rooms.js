@@ -37,6 +37,18 @@ export const saveUser=async user=>{
    return data;
 }
 
+// get user role 
+export const getUserRole = async id =>{
+    const {data} = await axiosSecure.get(`/getUserRole/${id}`)
+    return data
+}
+
+// create jwt 
+export const getJwt = async(user)=>{
+    const {data} = await axiosSecure.post('/jwt',user)
+    return data;
+}
+
 export const clearCookie = async()=>{
     const {data}= await axiosSecure.post('/logout')
     return data 
