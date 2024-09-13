@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { FcGoogle } from 'react-icons/fc'
 import axios from 'axios'
 import { imageUpload } from '../../Utilities/Utils'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
 import { saveUser } from '../../api/Rooms'
+import Social from '../../components/Shared/Social/Social'
 
 const SignUp = () => {
   const {createUser,updateUserProfile,user}=useContext(AuthContext)
@@ -122,11 +122,8 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div  className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
+        
+        <Social></Social>
         <p className='px-6 text-sm text-center text-gray-400'>
           Already have an account?{' '}
           <Link
