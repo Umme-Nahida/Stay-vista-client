@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { user,logOut } = useAuth()
+  const {user,logOut } = useAuth()
 
   const handleLogOut = ()=>{
     logOut()
@@ -55,21 +55,6 @@ const MenuDropdown = () => {
               Home
             </Link>
 
-            <Link
-              to='/login'
-              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-            >
-              Login
-            </Link>
-            <Link
-              to='/signup'
-              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-            >
-              Sign Up
-            </Link>
-           
-            </> :
-            <>
             
             <Link
               to='/dashboard'
@@ -82,6 +67,22 @@ const MenuDropdown = () => {
               className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
             >
               Log Out
+            </Link>
+            </>
+             :
+            <>
+            
+            <Link
+              to='/login'
+              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+            >
+              Login
+            </Link>
+            <Link
+              to='/signup'
+              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+            >
+              Sign Up
             </Link>
             </>
            }

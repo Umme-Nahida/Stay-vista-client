@@ -38,9 +38,9 @@ export const saveUser=async user=>{
 }
 
 // get user role 
-export const getUserRole = async id =>{
-    const {data} = await axiosSecure.get(`/getUserRole/${id}`)
-    return data
+export const getUserRole = async email =>{
+    const {data} = await axiosSecure.get(`/getUserRole/${email}`)
+    return data;
 }
 
 // create jwt 
@@ -50,7 +50,7 @@ export const getJwt = async(user)=>{
 }
 
 export const clearCookie = async()=>{
-    const {data}= await axiosSecure.post('/logout')
+    const {data}= await axiosSecure.get('/logout')
     return data 
 }
 

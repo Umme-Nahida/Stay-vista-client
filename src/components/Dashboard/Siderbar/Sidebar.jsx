@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TbHomePlus } from "react-icons/tb";
 import { MdHomeWork } from "react-icons/md";
 
@@ -13,10 +13,14 @@ import { BsGraphUp } from 'react-icons/bs'
 import MenuItem from './MenuItem'
 import ToggleBtn from '../../ToggleBtn'
 import Logo from './Logo'
+import { getUserRole } from '../../../api/Rooms';
+import useAuth from '../../../hooks/useAuth';
 
 const Sidebar = () => {
+  const {user}=useAuth()
   const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(false)
+  const [role,setRole]=useState('')
 
   //   For guest/host menu item toggle button
   const toggleHandler = event => {
@@ -28,7 +32,15 @@ const Sidebar = () => {
   }
 
   // get user role 
+  useEffect(()=>{
+    getUserRole(user?.email)
+    .then(data=>{
+      console.log("get user role",data)
+      setRole(data?.role)
+    })
+  },[user?.emial])
 
+  console.log(role)
   return (
     <>
       {/* Small Screen Navbar */}
