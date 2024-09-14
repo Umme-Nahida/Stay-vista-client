@@ -30,7 +30,7 @@ export const saveUser=async user=>{
 
     const userInfo = {
         email: user?.email,
-        role:'host',
+        role:'guest',
         status: "Verified"
     }
    const {data}= await axiosSecure.put(`/users/${user?.email}`,userInfo)

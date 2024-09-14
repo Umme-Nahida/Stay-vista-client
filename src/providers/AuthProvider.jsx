@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       console.log('CurrentUser-->', currentUser)
-      const loggedUser = currentUser?.email || user.email
+      const loggedUser = currentUser?.email || user?.email
       if(currentUser){
         getJwt(loggedUser)
       }
