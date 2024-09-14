@@ -10,7 +10,6 @@ const MyListings = () => {
   const [listing,setListing] = useState([])
 
   useEffect(()=>{
-    
     hostRooms(user?.email)
     .then(data=>{
       setListing(data)

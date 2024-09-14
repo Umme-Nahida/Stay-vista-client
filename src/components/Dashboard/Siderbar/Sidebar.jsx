@@ -15,12 +15,17 @@ import ToggleBtn from '../../ToggleBtn'
 import Logo from './Logo'
 import { getUserRole } from '../../../api/Rooms';
 import useAuth from '../../../hooks/useAuth';
+import AdminMenu from './Menu/AdminMenu';
+import HostMenu from './Menu/HostMenu';
+import GuestMenu from './Menu/GuestMenu';
+import useRole from '../../../hooks/useRole';
 
 const Sidebar = () => {
   const {user}=useAuth()
   const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(false)
-  const [role,setRole]=useState('')
+  const [roles]= useRole();
+  console.log(toggle,roles)
 
   //   For guest/host menu item toggle button
   const toggleHandler = event => {
@@ -31,16 +36,6 @@ const Sidebar = () => {
     setActive(!isActive)
   }
 
-  // get user role 
-  useEffect(()=>{
-    getUserRole(user?.email)
-    .then(data=>{
-      console.log("get user role",data)
-      setRole(data?.role)
-    })
-  },[user?.emial])
-
-  console.log(role)
   return (
     <>
       {/* Small Screen Navbar */}
@@ -74,25 +69,12 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             {/* If a user is host */}
-            <ToggleBtn toggleHandler={toggleHandler} />
+            {roles?.role === 'host' && <ToggleBtn toggleHandler={toggleHandler} />}
             <nav>
-              <MenuItem
-                icon={BsGraphUp}
-                label='Statistics'
-                address='/dashboard'
-              />
-              <MenuItem
-                icon={TbHomePlus}
-                label='Add Room'
-                address='add-room'
-              />
-              <MenuItem
-                icon={MdHomeWork}
-                label='My Listings'
-                address='my-listings'
-              />
-
-              {/* Menu Items */}
+              {roles?.role === 'admin' && <AdminMenu></AdminMenu>}
+              {roles?.role === 'host' ? toggle ? <HostMenu></HostMenu> : <GuestMenu></GuestMenu> : " "}
+              {roles?.role === 'guest' && <GuestMenu></GuestMenu>}
+ 
             </nav>
           </div>
         </div>
