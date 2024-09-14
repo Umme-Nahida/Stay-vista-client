@@ -9,6 +9,8 @@ import DashboardLayout from '../components/Dashboard/DashboardLayout'
 import AddRoom from '../components/Dashboard/Host/AddRoom'
 import MyListings from '../components/Dashboard/Host/MyListings'
 import { getRoom } from '../api/Rooms'
+import HostRoute from './HostRoute'
+import PrivateRoute from './PrivateRoute'
 
 export const router = createBrowserRouter([
   {
@@ -34,12 +36,12 @@ export const router = createBrowserRouter([
     children:[
       {
         path:'add-room',
-        element:<AddRoom></AddRoom>
+        element:<PrivateRoute><HostRoute><AddRoom></AddRoom></HostRoute></PrivateRoute>
       },
     
       {
         path:'my-listings',
-        element:<MyListings></MyListings>
+        element:<PrivateRoute><HostRoute><MyListings></MyListings></HostRoute></PrivateRoute>
       },
     ]
   },
