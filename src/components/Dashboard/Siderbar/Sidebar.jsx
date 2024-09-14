@@ -19,13 +19,14 @@ import AdminMenu from './Menu/AdminMenu';
 import HostMenu from './Menu/HostMenu';
 import GuestMenu from './Menu/GuestMenu';
 import useRole from '../../../hooks/useRole';
+import toast from 'react-hot-toast';
 
 const Sidebar = () => {
-  const {user}=useAuth()
+  const {user,logOut}=useAuth()
   const [toggle, setToggle] = useState(false)
   const [isActive, setActive] = useState(false)
   const [roles]= useRole();
-  console.log(toggle,roles)
+  console.log(roles)
 
   //   For guest/host menu item toggle button
   const toggleHandler = event => {
@@ -35,6 +36,13 @@ const Sidebar = () => {
   const handleToggle = () => {
     setActive(!isActive)
   }
+
+  // handle log out
+  const handleLogOut=async()=>{
+    await logOut()
+    toast.success('user log out successfully')
+  }
+
 
   return (
     <>
@@ -72,8 +80,8 @@ const Sidebar = () => {
             {roles?.role === 'host' && <ToggleBtn toggleHandler={toggleHandler} />}
             <nav>
               {roles?.role === 'admin' && <AdminMenu></AdminMenu>}
-              {roles?.role === 'host' ? toggle ? <HostMenu></HostMenu> : <GuestMenu></GuestMenu> : " "}
               {roles?.role === 'guest' && <GuestMenu></GuestMenu>}
+              {roles?.role === 'host' ? toggle ? <HostMenu></HostMenu> : <GuestMenu></GuestMenu> : " "}
  
             </nav>
           </div>
@@ -87,7 +95,7 @@ const Sidebar = () => {
             label='Profile'
             address='/dashboard/profile'
           />
-          <button className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'>
+          <button onClick={handleLogOut} className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'>
             <GrLogout className='w-5 h-5' />
 
             <span className='mx-4 font-medium'>Logout</span>

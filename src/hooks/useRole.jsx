@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { getUserRole } from "../api/Rooms";
 import useAuth from "./useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const useRole = () => {
-  const {user}=useAuth(); 
-  console.log(user?.email)     
-  const [roles, setRole] = useState(null);
-  const [loading,setLoading] = useState(true)
+  const {user,loading}=useAuth(); 
 
-  // get user role
-  useEffect(() => {
-    getUserRole(user?.email)
-    .then(data=>{
-        console.log(data)
-        setRole(data)
-        setLoading(false)
-    })
+  // // get user role
+  // useEffect(() => {
+  //   getUserRole(user?.email)
+  //   .then(data=>{
+  //       console.log(data)
+  //       setRole(data)
+  //       setLoading(false)
+  //   })
       
-  }, [user]);
-  console.log(roles)
+  // }, [user]);
+  // console.log(roles)
 
-  return [roles,loading];
+  const {data:roles,isLoading} = useQuery({
+    enableda: !loading && !!user?.email,
+    queryKey:['roles'],
+    queryFn: getUserRole(user?.email)
+
+  })
+
+  return [roles];
 };
 
 export default useRole;
