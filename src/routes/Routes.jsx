@@ -15,6 +15,7 @@ import ManageUser from '../components/Dashboard/Admin/ManageUser'
 import AdminMenu from '../components/Dashboard/Siderbar/Menu/AdminMenu'
 import AdminRoute from './AdminRoute'
 import MyBookings from '../components/Dashboard/Guest/MyBookings'
+import Profile from '../components/Dashboard/Common/Profile/Profile'
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +55,13 @@ export const router = createBrowserRouter([
       {
         path:'my-bookings',
         element: <MyBookings></MyBookings>
-      }
+      },
+
+      // common route
+      {
+        path:'profile',
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
+      },
     ]
   },
 ])
