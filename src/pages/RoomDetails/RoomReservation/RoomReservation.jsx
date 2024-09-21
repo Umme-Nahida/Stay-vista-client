@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Calender from '../Calender'
 import Button from '../../../components/Button/Button'
 import { formatDistance } from 'date-fns'
+import BookingModal from '../../../components/Dashboard/Common/Modal/BookingModal'
 
 const RoomReservation = ({ roomData }) => {
  console.log(roomData)
@@ -10,6 +11,13 @@ const RoomReservation = ({ roomData }) => {
     endDate: roomData?.to ? new Date(roomData.to) : new Date(),
     key: 'selection',
 });
+
+const [isOpen,setIsOpen]=useState(false)
+
+// close modal funtion
+const closeModal =()=>{
+  setIsOpen(false)
+}
 
 //   const handleSelect = ranges => {
 //     setValue({ ...value })
@@ -22,6 +30,9 @@ const totalDays = parseFloat(
  
 
 const totalPrice = totalDays * roomData?.price;
+
+// this is booking info
+
 
 
   return (
@@ -37,7 +48,7 @@ const totalPrice = totalDays * roomData?.price;
 
       <hr />
       <div className='p-4'>
-        <Button label='Reserve' />
+        <Button onClick={()=>setIsOpen(true)} label='Reserve' />
 
       </div>
       <hr />
@@ -45,6 +56,9 @@ const totalPrice = totalDays * roomData?.price;
         <div>Total</div>
         <div>$ {totalPrice}</div>
       </div>
+
+      {/* modal */}
+      <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={roomData}></BookingModal>
     </div>
   )
 }
