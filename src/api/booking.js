@@ -6,7 +6,7 @@ export const getBookings = async(email)=>{
     return data
 }
 
-// get all host booking room data
+// get all bookings for host 
 export const getHostBookings = async(email)=>{
     const {data}= await axiosSecure.get(`/bookings/host?email=${email}`)
     return data
