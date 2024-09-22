@@ -3,8 +3,10 @@ import Calender from '../Calender'
 import Button from '../../../components/Button/Button'
 import { formatDistance } from 'date-fns'
 import BookingModal from '../../../components/Dashboard/Common/Modal/BookingModal'
+import useAuth from '../../../hooks/useAuth'
 
 const RoomReservation = ({ roomData }) => {
+  const {user}=useAuth()
  console.log(roomData)
  const [value, setValue] = useState({
     startDate: roomData?.from ? new Date(roomData.from) : new Date(),
@@ -32,7 +34,16 @@ const totalDays = parseFloat(
 const totalPrice = totalDays * roomData?.price;
 
 // this is booking info
-
+const [bookingInfo,setBookingInfo]=useState({
+  guest:{name:user?.displayName, email:user?.email, image:user?.photoURL},
+  host: roomData?.host?.email,
+  location:roomData?.location,
+  price:totalPrice,
+  to: value?.endDate,
+  from: value?.startDate,
+  title: roomData?.title,
+  id:roomData?._id 
+})
 
 
   return (
@@ -48,7 +59,7 @@ const totalPrice = totalDays * roomData?.price;
 
       <hr />
       <div className='p-4'>
-        <Button onClick={()=>setIsOpen(true)} label='Reserve' />
+        <Button disabled={roomData.host.email === user?.email || roomData.booked} onClick={()=>setIsOpen(true)} label='Reserve' />
 
       </div>
       <hr />
@@ -58,7 +69,7 @@ const totalPrice = totalDays * roomData?.price;
       </div>
 
       {/* modal */}
-      <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={roomData}></BookingModal>
+      <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={bookingInfo}></BookingModal>
     </div>
   )
 }
