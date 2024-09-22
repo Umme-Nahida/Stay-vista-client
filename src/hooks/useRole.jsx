@@ -21,11 +21,12 @@ const useRole = () => {
   const {data:roles,isLoading} = useQuery({
     enableda: !loading && !!user?.email,
     queryKey:['roles'],
-    queryFn: getUserRole(user?.email)
+    queryFn: async ()=> await getUserRole(user?.email)
 
   })
+  console.log(roles)
 
-  return [roles];
+  return [roles,isLoading];
 };
 
 export default useRole;

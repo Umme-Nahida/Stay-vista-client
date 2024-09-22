@@ -1,21 +1,21 @@
-import { useQuery } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
-import { getBookings } from '../../../api/booking'
 import useAuth from '../../../hooks/useAuth'
+import { getHostBookings } from '../../../api/booking'
 import TableRow from '../TableRow/TableRow'
+import { useQuery } from '@tanstack/react-query'
 
-const MyBookings = () => {
-  const {user}=useAuth()
-  const {isLoading,refetch,data:bookings}=useQuery({
-    queryKey:'bookings',
-    queryFn: async()=> await getBookings(user?.email)
+const ManageBookings = () => {
 
-  })
-console.log(bookings)
+    const {user}=useAuth()
+    const {isLoading,refetch,data:bookings}=useQuery({
+      queryKey:'bookings',
+      queryFn: async()=> await getHostBookings(user?.email)
+  
+    })
   return (
     <>
       <Helmet>
-        <title>My Bookings</title>
+        <title>Manage Bookings</title>
       </Helmet>
 
       <div className='container mx-auto px-4 sm:px-8'>
@@ -35,7 +35,7 @@ console.log(bookings)
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Info
+                      Guest Info
                     </th>
                     <th
                       scope='col'
@@ -63,12 +63,13 @@ console.log(bookings)
                     </th>
                   </tr>
                 </thead>
-                <tbody>{/* Table Row Data */}
-                  {
-                    bookings?.map(booking=>(
-                      <TableRow key={booking._id} booking={booking}></TableRow>
-                    ))
-                  }
+                <tbody>
+                    {/* Table row data */}
+                    {
+                        bookings?.map(booking=>(
+                            <TableRow key={booking._id} booking={booking}></TableRow>
+                        ))
+                    }
                 </tbody>
               </table>
             </div>
@@ -79,4 +80,4 @@ console.log(bookings)
   )
 }
 
-export default MyBookings
+export default ManageBookings
