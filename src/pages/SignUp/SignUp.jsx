@@ -20,6 +20,7 @@ const SignUp = () => {
 
     // get selected image
     const image = form.image.files[0];
+    console.log('this is image',image)
     // upload image in hosting
     const imageUrl= await imageUpload(image);
     const resutl = await createUser(email,password)

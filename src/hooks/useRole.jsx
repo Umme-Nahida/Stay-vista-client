@@ -19,7 +19,7 @@ const useRole = () => {
   // console.log(roles)
 
   const {data:roles,isLoading} = useQuery({
-    enableda: !loading && !!user?.email,
+    enabled: !loading && !!user?.email,
     queryKey:['roles'],
     queryFn: async ()=> await getUserRole(user?.email)
 
