@@ -1,11 +1,24 @@
 import { useState } from "react"
 import UpdateUserModal from "../Common/Modal/UpdateUserModal"
+import { createHost } from "../../../api/rooms"
+import toast from "react-hot-toast"
 
 const UserDataRow = ({ user }) => {
     const [isOpen,setIsOpen]= useState(false)
 
     const modalHandler = async selected=>{
+      try{
         console.log(selected)
+        const res = await createHost(user?.email,selected)
+        console.log(res)
+        if(res.modifiedCount > 0 ){
+          toast.success('Success!, guest become a host')
+        }
+      }catch(err){
+        console.log(err)
+      }finally{
+        setIsOpen(false)
+      }
     }
     return (
       <tr>
