@@ -44,6 +44,21 @@ export const getUserRole = async (email) =>{
     return data;
 }
 
+
+// become a host api request status  
+export const becomeHost = async email=>{
+    const {data}= await axiosSecure.put(`/users/${email}`,{status:'Requested'})
+    console.log(data)
+    return data;
+}
+
+//create become a host api
+export const createHost = async(email,selected)=>{
+    const {data}= await axiosSecure.put(`/userHost/${email}`,{role:selected})
+    // console.log("host res", data)
+    return data;
+}
+
 // create jwt 
 export const getJwt = async(user)=>{
     const {data} = await axiosSecure.post('/jwt',user)
