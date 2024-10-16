@@ -12,7 +12,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
-import { clearCookie, getJwt } from '../api/Rooms'
+import { clearCookie, getJwt } from '../api/rooms'
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
