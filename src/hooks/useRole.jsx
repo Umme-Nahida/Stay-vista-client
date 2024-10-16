@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { getUserRole } from "../api/Rooms";
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { getUserRole } from "../api/rooms";
 
 const useRole = () => {
   const {user,loading}=useAuth(); 
@@ -21,7 +20,11 @@ const useRole = () => {
   const {data:roles,isLoading} = useQuery({
     enabled: !loading && !!user?.email,
     queryKey:['roles'],
-    queryFn: async ()=> await getUserRole(user?.email)
+    queryFn: async ()=> {
+      const res = await getUserRole(user?.email)
+      console.log(res)
+      return res
+    }
 
   })
   console.log(roles)
