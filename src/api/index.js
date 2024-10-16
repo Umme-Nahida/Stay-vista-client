@@ -1,5 +1,5 @@
 import axios from "axios";
-import { clearCookie } from "./Rooms";
+import { clearCookie } from "./rooms";
 
 
 const axiosSecure = axios.create({

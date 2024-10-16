@@ -60,8 +60,8 @@ export const createHost = async(email,selected)=>{
 }
 
 // create jwt 
-export const getJwt = async(user)=>{
-    const {data} = await axiosSecure.post('/jwt',user)
+export const getJwt = async(email)=>{
+    const {data} = await axiosSecure.post('/jwt',{email})
     return data;
 }
 

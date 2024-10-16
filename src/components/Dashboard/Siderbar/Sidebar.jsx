@@ -12,7 +12,6 @@ import { BsGraphUp } from "react-icons/bs";
 import MenuItem from "./MenuItem";
 import ToggleBtn from "../../ToggleBtn";
 import Logo from "./Logo";
-import { getUserRole } from "../../../api/Rooms";
 import useAuth from "../../../hooks/useAuth";
 import AdminMenu from "./Menu/AdminMenu";
 import HostMenu from "./Menu/HostMenu";

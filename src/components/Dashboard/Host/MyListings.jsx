@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../../hooks/useAuth";
-import { hostRooms } from "../../../api/Rooms";
 import RoomDataRow from "../TableRow/RoomDataRow";
+import { hostRooms } from "../../../api/rooms";
 
 const MyListings = () => {
   const {user}= useAuth()

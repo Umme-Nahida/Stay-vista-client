@@ -4,25 +4,51 @@ import { Link } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
 import toast from 'react-hot-toast'
+import HostModal from '../../Dashboard/Common/Modal/HostRequestModal'
+import useRole from '../../../hooks/useRole'
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isModalOpen,setIsModalOpen]=useState(false)
   const {user,logOut } = useAuth()
+  const [roles]=useRole()
 
   const handleLogOut = ()=>{
     logOut()
     toast.success('user LogOut successfully')
   }
 
+   // close modal
+   const closeModal = ()=>{
+    setIsModalOpen(false)
+  }
+
+   // host request modal
+   const modalHandler =async()=>{
+     
+    try{
+      const res = await becomeHost(user?.email)
+      if(res.modifiedCount > 0){
+       toast.success('Success! Please wait for admin confirmation')
+      }else{
+       toast.success('Please wait for admin approval')
+      }
+    }finally{
+      setIsOpen(false)
+    }
+   
+}
 
   return (
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         {/* Become A Host btn */}
         <div className='hidden md:block'>
-          <button className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'>
-            Host your home
-          </button>
+         {(!user || !roles?.role || roles?.role === 'guest') && (
+           <button disabled={!user} onClick={()=>setIsModalOpen(true)} className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'>
+           Host your home
+         </button>
+         )}
         </div>
         {/* Dropdown btn */}
         <div
@@ -89,6 +115,7 @@ const MenuDropdown = () => {
           </div>
         </div>
       )}
+      <HostModal isOpen={isModalOpen} closeModal={closeModal} modalHandler={modalHandler}/>
     </div>
   )
 }

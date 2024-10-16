@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet-async";
 import AddRoomForm from "../../Form/AddRoomForm";
 import { imageUpload } from "../../../Utilities/Utils";
 import useAuth from "../../../hooks/useAuth";
-import { saveRooms } from "../../../api/Rooms";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { saveRooms } from "../../../api/rooms";
 
 const AddRoom = () => {
     const [loading, setLoading]=useState(false)

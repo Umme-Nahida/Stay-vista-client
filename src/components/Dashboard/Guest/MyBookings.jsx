@@ -7,7 +7,7 @@ import TableRow from '../TableRow/TableRow'
 const MyBookings = () => {
   const {user}=useAuth()
   const {isLoading,refetch,data:bookings}=useQuery({
-    queryKey:'bookings',
+    queryKey:['bookings'],
     queryFn: async()=> await getBookings(user?.email)
 
   })
